@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css" rel="stylesheet">
-    <title>Sidebar with Bitcoin Price Widget</title>
+    <title>Sidebar with CoinMarketCap Bitcoin Price Widget</title>
     <style>
         html, body {
             height: 100%;
@@ -25,36 +25,21 @@
             width: 200px;
         }
         .content {
-            flex-grow: 1;
+            flex-grow: 1; /* Take up all remaining space */
             padding: 10px;
             overflow: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .pdf-iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-        .bitcoin-widget {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 300px;
-            width: 100%;
-        }
-        .bitcoin-widget h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        .bitcoin-widget p {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #f7931a; /* Bitcoin orange */
-            margin: 0;
+        #coinmarketcap-widget-coin-price-block {
+            width: 100%; /* Ensure widget spans full width */
+            height: 100%; /* Fill available height */
+            display: flex;
+            justify-content: center; /* Center horizontally if widget allows */
+            align-items: center; /* Center vertically if widget allows */
         }
         .sidebar a.active {
             background-color: #4a5568; /* bg-gray-700 */
@@ -119,15 +104,15 @@
 
         <!-- Content Area (Main Body) -->
         <div class="content" id="content-area">
-            <!-- Initial Bitcoin Widget -->
-            <div class="bitcoin-widget" id="bitcoin-widget">
-                <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script><div id="coinmarketcap-widget-coin-price-block" coins="1,23769,27486,9258,24091,11841" currency="USD" theme="light" transparent="true" show-symbol-logo="true"></div>
- <!-- Placeholder price -->
-            </div>
+            <!-- CoinMarketCap Bitcoin Widget -->
+            <div id="coinmarketcap-widget-coin-price-block" coins="1,23769,27486,9258,24091,11841" currency="USD" theme="light" transparent="true" show-symbol-logo="true" style="display: block;"></div>
             <!-- Hidden PDF Iframe (for other menu items) -->
             <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
         </div>
     </div>
+
+    <!-- CoinMarketCap Widget Script -->
+    <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script>
 
     <!-- JavaScript for Dynamic Content Switching, Active State, and Submenus -->
     <script>
@@ -136,7 +121,7 @@
             const submenuToggles = document.querySelectorAll('.submenu-toggle');
             const contentArea = document.getElementById('content-area');
             const pdfViewer = document.getElementById('pdfViewer');
-            const bitcoinWidget = document.getElementById('bitcoin-widget');
+            const bitcoinWidget = document.getElementById('coinmarketcap-widget-coin-price-block');
 
             // Handle content switching and active state
             links.forEach(link => {
