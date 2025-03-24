@@ -10,11 +10,15 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            width: 100%; /* Ensure full width */
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         .container {
             display: flex;
             height: 100vh;
-            width: 100vw;
+            width: 100%; /* Full width of viewport */
+            margin: 0;
+            padding: 0;
         }
         .sidebar {
             flex-shrink: 0;
@@ -26,20 +30,24 @@
         }
         .content {
             flex-grow: 1; /* Take up all remaining space */
-            padding: 10px;
+            padding: 0; /* Remove padding to maximize width */
+            margin: 0;
+            width: 100%; /* Ensure content spans full width */
+            height: 100%; /* Full height */
             overflow: auto;
         }
         .pdf-iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: block; /* Ensure no gaps */
         }
         #coinmarketcap-widget-coin-price-block {
-            width: 100%; /* Ensure widget spans full width */
-            height: 100%; /* Fill available height */
-            display: flex;
-            justify-content: center; /* Center horizontally if widget allows */
-            align-items: center; /* Center vertically if widget allows */
+            width: 100%; /* Full width of content area */
+            height: 100%; /* Full height of content area */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Include padding/border in width */
         }
         .sidebar a.active {
             background-color: #4a5568; /* bg-gray-700 */
@@ -54,7 +62,7 @@
         }
     </style>
 </head>
-<body class="bg-white"> <!-- Changed from bg-gray-300 to bg-white -->
+<body class="bg-white">
     <div class="container">
         <!-- Sidebar (Left Panel) -->
         <div class="sidebar flex flex-col items-start w-40 h-full overflow-hidden text-gray-400 bg-gray-900 rounded expanded">
@@ -62,7 +70,7 @@
                 <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
                 </svg>
-                <span class="ml-2 text-sm font-bold">The App</span>
+                <span class="ml-2 text-sm font-bold">CCX</span>
             </a>
             <div class="w-full px-2">
                 <div class="flex flex-col items-start w-full mt-3 border-t border-gray-700">
@@ -71,14 +79,14 @@
                             <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            <span class="ml-2 text-sm font-medium">Dashboard</span>
+                            <span class="ml-2 text-sm font-medium">Trading</span>
                         </a>
                         <div class="submenu">
-                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
-                                <span class="ml-2 text-sm font-medium">Overview</span>
+                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://ta3bviqjtxy1kv7x.public.blob.vercel-storage.com/%E1%83%94%E1%83%9A%E1%83%98%E1%83%9D%E1%83%A2%E1%83%A3%E1%83%A0%E1%83%98_%E1%83%A2%E1%83%90%E1%83%9A%E1%83%A6%E1%83%98%E1%83%A1_%E1%83%97%E1%83%94%E1%83%9D%E1%83%A0%E1%83%98%E1%83%90_-0ZlWm8ZNl6BKX4qnHWUy9sQqgfyJ5H.pdf">
+                                <span class="ml-2 text-sm font-medium">ელიოტური ტალღის თეორია</span>
                             </a>
-                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
-                                <span class="ml-2 text-sm font-medium">Stats</span>
+                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://ta3bviqjtxy1kv7x.public.blob.vercel-storage.com/%E1%83%AC%E1%83%98%E1%83%9C%E1%83%90%E1%83%A6%E1%83%9D%E1%83%91%E1%83%90_%E1%83%93%E1%83%90_%E1%83%9B%E1%83%AE%E1%83%90%E1%83%A0%E1%83%93%E1%83%90%E1%83%AD%E1%83%94%E1%83%A0%E1%83%90_-xjNZxqUDkCRnBJeTMaN0oua910AI2A.pdf">
+                                <span class="ml-2 text-sm font-medium">წინაღობა და მხარდაჭერა</span>
                             </a>
                         </div>
                     </div>
