@@ -14,15 +14,15 @@
         .container {
             display: flex;
             height: 100vh;
-            width: 100vw; /* Full viewport width */
+            width: 100vw;
         }
         .sidebar {
             flex-shrink: 0;
-            width: 40px; /* Default collapsed width */
-            transition: width 0.3s ease; /* Smooth transition for expand/collapse */
+            width: 40px;
+            transition: width 0.3s ease;
         }
         .sidebar.expanded {
-            width: 200px; /* Expanded width */
+            width: 200px;
         }
         .content {
             flex-grow: 1;
@@ -35,10 +35,9 @@
             border: none;
         }
         .sidebar a.active {
-            background-color: #4a5568; /* bg-gray-700 */
-            color: #e2e8f0; /* text-gray-200 */
+            background-color: #4a5568;
+            color: #e2e8f0;
         }
-        /* Submenu styles */
         .submenu {
             display: none;
             width: 100%;
@@ -61,18 +60,30 @@
             </a>
             <div class="w-full px-2">
                 <div class="flex flex-col items-start w-full mt-3 border-t border-gray-700">
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
-                        <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                        <span class="ml-2 text-sm font-medium">Dashboard</span>
-                    </a>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
-                        <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <span class="ml-2 text-sm font-medium">Search</span>
-                    </a>
+                    <div class="w-full">
+                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
+                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Dashboard</span>
+                        </a>
+                        <div class="submenu">
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">Overview</a>
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Stats</a>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
+                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Search</span>
+                        </a>
+                        <div class="submenu">
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Recent</a>
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">Advanced</a>
+                        </div>
+                    </div>
                     <div class="w-full">
                         <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
                             <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -85,12 +96,18 @@
                             <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Sub Insight 2</a>
                         </div>
                     </div>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
-                        <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                        </svg>
-                        <span class="ml-2 text-sm font-medium">Docs</span>
-                    </a>
+                    <div class="w-full">
+                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
+                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Docs</span>
+                        </a>
+                        <div class="submenu">
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Guide</a>
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">API</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="flex flex-col items-start w-full mt-2 border-t border-gray-700">
                     <div class="w-full">
@@ -105,19 +122,31 @@
                             <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Product B</a>
                         </div>
                     </div>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
-                        <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                        </svg>
-                        <span class="ml-2 text-sm font-medium">Settings</span>
-                    </a>
-                    <a class="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
-                        <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                        </svg>
-                        <span class="ml-2 text-sm font-medium">Messages</span>
-                        <span class="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
-                    </a>
+                    <div class="w-full">
+                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
+                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Settings</span>
+                        </a>
+                        <div class="submenu">
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">General</a>
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">Security</a>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <a class="relative flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
+                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Messages</span>
+                            <span class="absolute top-0 left-0 w-2 h-2 mt-2 ml-2 bg-indigo-500 rounded-full"></span>
+                        </a>
+                        <div class="submenu">
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">Inbox</a>
+                            <a class="flex items-center w-full h-10 px-3 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">Sent</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-800 hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
@@ -157,6 +186,7 @@
                 toggle.addEventListener('click', (e) => {
                     const submenu = toggle.nextElementSibling;
                     if (submenu.classList.contains('submenu')) {
+                        e.stopPropagation(); // Prevent triggering the PDF load on toggle click
                         submenu.classList.toggle('active');
                     }
                 });
