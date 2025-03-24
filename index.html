@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegant PDF Learning Hub</title>
+    <title>Elegant PDF Learning Hub with Submenus</title>
     <style>
         :root {
             --primary-color: #1a1a2e;
@@ -75,6 +75,33 @@
 
         .category-btn.active {
             background: var(--accent-color);
+        }
+
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .submenu.active {
+            max-height: 300px; /* Adjust based on content */
+        }
+
+        .submenu-item {
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .submenu-item:hover {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .submenu-item.active {
+            background: var(--secondary-color);
             color: white;
         }
 
@@ -98,7 +125,6 @@
         .pdf-item {
             background: var(--card-bg);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
         }
@@ -132,6 +158,11 @@
                 padding: 0.5rem;
             }
 
+            .submenu-item {
+                padding-left: 1rem;
+                font-size: 0.8rem;
+            }
+
             .main-content {
                 margin-left: 80px;
             }
@@ -143,32 +174,43 @@
         <h1>Learn Hub</h1>
         <ul class="category-list">
             <li class="category-item">
-                <button class="category-btn" data-target="math">Math Lessons</button>
+                <button class="category-btn" data-target="math">თრეიდინგი</button>
+                <div class="submenu">
+                    <div class="submenu-item" data-pdf="math-algebra">წინაღობა & მხარდაჭერა</div>
+                    <div class="submenu-item" data-pdf="math-geometry">Geometry Guide</div>
+                </div>
             </li>
             <li class="category-item">
-                <button class="category-btn" data-target="science">Science Lessons</button>
+                <button class="category-btn" data-target="science">ბლოკჩეინი</button>
+                <div class="submenu">
+                    <div class="submenu-item" data-pdf="science-physics">Physics Intro</div>
+                    <div class="submenu-item" data-pdf="science-chemistry">Chemistry Basics</div>
+                </div>
             </li>
-            <!-- Add more categories here -->
+            <!-- Add more categories and submenus here -->
         </ul>
     </div>
 
     <div class="main-content">
-        <div class="pdf-container" id="math">
+        <div class="pdf-container" id="math-algebra">
             <div class="pdf-item">
-                <h3>Algebra Basics</h3>
-                <iframe src="path/to/your/algebra.pdf" loading="lazy"></iframe>
+                <h3>წინაღობა & მხარდაჭერა</h3>
+                <iframe src="https://ta3bviqjtxy1kv7x.public.blob.vercel-storage.com/%E1%83%AC%E1%83%98%E1%83%9C%E1%83%90%E1%83%A6%E1%83%9D%E1%83%91%E1%83%90_%E1%83%93%E1%83%90_%E1%83%9B%E1%83%AE%E1%83%90%E1%83%A0%E1%83%93%E1%83%90%E1%83%AD%E1%83%94%E1%83%A0%E1%83%90_-xjNZxqUDkCRnBJeTMaN0oua910AI2A.pdf" loading="lazy"></iframe>
             </div>
+        </div>
+        <div class="pdf-container" id="math-geometry">
             <div class="pdf-item">
                 <h3>Geometry Guide</h3>
                 <iframe src="path/to/your/geometry.pdf" loading="lazy"></iframe>
             </div>
         </div>
-
-        <div class="pdf-container" id="science">
+        <div class="pdf-container" id="science-physics">
             <div class="pdf-item">
                 <h3>Physics Intro</h3>
                 <iframe src="path/to/your/physics.pdf" loading="lazy"></iframe>
             </div>
+        </div>
+        <div class="pdf-container" id="science-chemistry">
             <div class="pdf-item">
                 <h3>Chemistry Basics</h3>
                 <iframe src="path/to/your/chemistry.pdf" loading="lazy"></iframe>
@@ -177,25 +219,47 @@
     </div>
 
     <script>
-        const buttons = document.querySelectorAll('.category-btn');
-        const containers = document.querySelectorAll('.pdf-container');
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const submenuItems = document.querySelectorAll('.submenu-item');
+        const pdfContainers = document.querySelectorAll('.pdf-container');
 
-        buttons.forEach(button => {
+        categoryButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove active class from all buttons and containers
-                buttons.forEach(btn => btn.classList.remove('active'));
-                containers.forEach(container => container.classList.remove('active'));
+                const submenu = button.nextElementSibling;
+                const isActive = button.classList.contains('active');
 
-                // Add active class to clicked button and corresponding container
-                button.classList.add('active');
-                const targetId = button.getAttribute('data-target');
+                // Collapse all submenus and remove active states
+                categoryButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.nextElementSibling.classList.remove('active');
+                });
+
+                // Toggle current submenu
+                if (!isActive) {
+                    button.classList.add('active');
+                    submenu.classList.add('active');
+                }
+            });
+        });
+
+        submenuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all submenu items and containers
+                submenuItems.forEach(i => i.classList.remove('active'));
+                pdfContainers.forEach(container => container.classList.remove('active'));
+
+                // Add active class to clicked item and corresponding container
+                item.classList.add('active');
+                const targetId = item.getAttribute('data-pdf');
                 document.getElementById(targetId).classList.add('active');
             });
         });
 
-        // Set first category as active by default
-        buttons[0].classList.add('active');
-        containers[0].classList.add('active');
+        // Set first category and first submenu item active by default
+        categoryButtons[0].classList.add('active');
+        categoryButtons[0].nextElementSibling.classList.add('active');
+        submenuItems[0].classList.add('active');
+        pdfContainers[0].classList.add('active');
     </script>
 </body>
 </html>
