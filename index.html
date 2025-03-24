@@ -10,13 +10,13 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            width: 100%; /* Ensure full width */
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            width: 100%;
+            overflow-x: hidden;
         }
         .container {
             display: flex;
             height: 100vh;
-            width: 100%; /* Full width of viewport */
+            width: 100%;
             margin: 0;
             padding: 0;
         }
@@ -28,26 +28,34 @@
         .sidebar.expanded {
             width: 200px;
         }
+        .main-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+        }
         .content {
-            flex-grow: 1; /* Take up all remaining space */
-            padding: 0; /* Remove padding to maximize width */
+            flex-grow: 0; /* Prevent stretching */
+            padding: 0;
             margin: 0;
-            width: 100%; /* Ensure content spans full width */
-            height: 100%; /* Full height */
+            width: auto; /* Fit content */
+            height: auto; /* Fit content */
             overflow: auto;
+            max-width: 100%; /* Prevent overflow */
+            max-height: 100%; /* Prevent overflow */
         }
         .pdf-iframe {
             width: 100%;
             height: 100%;
             border: none;
-            display: block; /* Ensure no gaps */
+            display: block;
         }
         #coinmarketcap-widget-coin-price-block {
-            width: 100%; /* Full width of content area */
-            height: 100%; /* Full height of content area */
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
-            box-sizing: border-box; /* Include padding/border in width */
+            box-sizing: border-box;
         }
         .sidebar a.active {
             background-color: #4a5568; /* bg-gray-700 */
@@ -94,12 +102,15 @@
             </div>
         </div>
 
-        <!-- Content Area (Main Body) -->
-        <div class="content" id="content-area">
-            <!-- CoinMarketCap Widget -->
-            <div id="coinmarketcap-widget-coin-price-block" coins="1,1027,23769,9258,27486,4846,24091,11840,11841,4758,13198" currency="USD" theme="light" transparent="false" show-symbol-logo="true" style="display: block;"></div>
-            <!-- Hidden PDF Iframe (for other menu items) -->
-            <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
+        <!-- Main Wrapper for Centering Content -->
+        <div class="main-wrapper">
+            <!-- Content Area (Main Body) -->
+            <div class="content" id="content-area">
+                <!-- CoinMarketCap Widget -->
+                <div id="coinmarketcap-widget-coin-price-block" coins="1,1027,23769,9258,27486,4846,24091,11840,11841,4758,13198" currency="USD" theme="light" transparent="false" show-symbol-logo="true" style="display: block;"></div>
+                <!-- Hidden PDF Iframe (for other menu items) -->
+                <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
+            </div>
         </div>
     </div>
 
