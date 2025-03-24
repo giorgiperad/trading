@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css" rel="stylesheet">
-    <title>Sidebar with CoinMarketCap Widget</title>
+    <title>Sidebar with CoinGecko Widget</title>
     <style>
         html, body {
             height: 100%;
@@ -45,14 +45,14 @@
             overflow: auto;
         }
         .pdf-iframe {
-            width: 120%;
+            width: 100%;
             height: 100%;
             border: none;
             display: block;
         }
-        #coinmarketcap-widget-coin-price-block {
+        .gecko-coin-list-widget {
             width: 100%;
-            height: auto;
+            height: auto; /* Let widget size naturally */
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -106,15 +106,15 @@
         <div class="main-wrapper">
             <!-- Content Area (Main Body) -->
             <div class="content" id="content-area">
-                <!-- CoinMarketCap Widget -->
-                 <gecko-coin-list-widget locale="en" outlined="true" coin-ids="bitcoin,rejuve-ai,sophiaverse,chia,stellar,kava,decentraland,zksync,arbitrum,optimism,dforce-token,band-protocol,notcoin,polkadot,cosmos,solana,singularity-finance,flare-networks,redbelly-network-token" initial-currency="usd"></gecko-coin-list-widget>
-             <!-- Hidden PDF Iframe (for other menu items) -->
-                <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe> 
+                <!-- CoinGecko Coin List Widget -->
+                <gecko-coin-list-widget class="gecko-coin-list-widget" locale="en" outlined="true" coin-ids="bitcoin,rejuve-ai,sophiaverse,chia,stellar,kava,decentraland,zksync,arbitrum,optimism,dforce-token,band-protocol,notcoin,polkadot,cosmos,solana,singularity-finance,flare-networks,redbelly-network-token" initial-currency="usd" style="display: block;"></gecko-coin-list-widget>
+                <!-- Hidden PDF Iframe (for other menu items) -->
+                <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- CoinMarketCap Widget Script -->
+    <!-- CoinGecko Widget Script -->
     <script src="https://widgets.coingecko.com/gecko-coin-list-widget.js"></script>
 
     <!-- JavaScript for Dynamic Content Switching, Active State, and Submenus -->
@@ -124,7 +124,7 @@
             const submenuToggles = document.querySelectorAll('.submenu-toggle');
             const contentArea = document.getElementById('content-area');
             const pdfViewer = document.getElementById('pdfViewer');
-            const cryptoWidget = document.getElementById('coinmarketcap-widget-coin-price-block');
+            const cryptoWidget = document.querySelector('.gecko-coin-list-widget');
 
             // Handle content switching and active state
             links.forEach(link => {
