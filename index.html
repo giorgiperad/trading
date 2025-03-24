@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css" rel="stylesheet">
-    <title>Sidebar with Crypto Fear Calculator Widget</title>
+    <title>Sidebar with CoinMarketCap Widget</title>
     <style>
         html, body {
             height: 100%;
@@ -25,7 +25,7 @@
             width: 200px;
         }
         .content {
-            flex-grow: 1;
+            flex-grow: 1; /* Take up all remaining space */
             padding: 10px;
             overflow: auto;
         }
@@ -34,12 +34,12 @@
             height: 100%;
             border: none;
         }
-        #crypto_fear_calc {
-            width: 100%;
-            height: 100%;
+        #coinmarketcap-widget-coin-price-block {
+            width: 100%; /* Ensure widget spans full width */
+            height: 100%; /* Fill available height */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Center horizontally if widget allows */
+            align-items: center; /* Center vertically if widget allows */
         }
         .sidebar a.active {
             background-color: #4a5568; /* bg-gray-700 */
@@ -54,13 +54,13 @@
         }
     </style>
 </head>
-<body class="bg-gray-300">
+<body class="bg-white"> <!-- Changed from bg-gray-300 to bg-white -->
     <div class="container">
         <!-- Sidebar (Left Panel) -->
         <div class="sidebar flex flex-col items-start w-40 h-full overflow-hidden text-gray-400 bg-gray-900 rounded expanded">
             <a class="flex items-center w-full px-3 mt-3" href="#">
                 <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553#toolbar=0&navpanes=0.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
+                    <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
                 </svg>
                 <span class="ml-2 text-sm font-bold">The App</span>
             </a>
@@ -82,37 +82,21 @@
                             </a>
                         </div>
                     </div>
-                    <div class="w-full">
-                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
-                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
-                            <span class="ml-2 text-sm font-medium">Insights</span>
-                        </a>
-                        <div class="submenu">
-                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
-                                <span class="ml-2 text-sm font-medium">Sub Insight 1</span>
-                            </a>
-                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
-                                <span class="ml-2 text-sm font-medium">Sub Insight 2</span>
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Content Area (Main Body) -->
         <div class="content" id="content-area">
-            <!-- Crypto Fear Calculator Widget -->
-            <div id="crypto_fear_calc" data-coins="BTC" data-cards="" data-rss="" data-theme="linear-gradient(90deg, rgba(115, 114, 114, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(115, 114, 114, 1) 100%)" data-text="#ffffff" data-button="#0581de" data-vertical="false" data-coin="BTC" data-price="USD" data-crypto-amount="1" data-switch-mode="false" data-currency-amount="1" data-language="en" style="display: block;"></div>
+            <!-- CoinMarketCap Widget -->
+            <div id="coinmarketcap-widget-coin-price-block" coins="1,1027,23769,9258,27486,4846,24091,11840,11841,4758,13198" currency="USD" theme="light" transparent="false" show-symbol-logo="true" style="display: block;"></div>
             <!-- Hidden PDF Iframe (for other menu items) -->
             <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
         </div>
     </div>
 
-    <!-- Crypto Fear Calculator Widget Script -->
-    <script src="https://img.plasbit.com/widget/js/crypto-fear-calculator.js"></script>
+    <!-- CoinMarketCap Widget Script -->
+    <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script>
 
     <!-- JavaScript for Dynamic Content Switching, Active State, and Submenus -->
     <script>
@@ -121,7 +105,7 @@
             const submenuToggles = document.querySelectorAll('.submenu-toggle');
             const contentArea = document.getElementById('content-area');
             const pdfViewer = document.getElementById('pdfViewer');
-            const cryptoWidget = document.getElementById('crypto_fear_calc');
+            const cryptoWidget = document.getElementById('coinmarketcap-widget-coin-price-block');
 
             // Handle content switching and active state
             links.forEach(link => {
