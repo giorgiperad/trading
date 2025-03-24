@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant PDF Learning Hub</title>
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #0f3460;
+            --accent-color: #e94560;
+            --bg-color: #f5f6fa;
+            --card-bg: white;
+            --text-color: #333;
+            --shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--primary-color);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+        }
+
+        .sidebar h1 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-btn {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.9);
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .category-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .pdf-container {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .pdf-container.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .pdf-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .pdf-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        iframe {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 8px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+
+            .sidebar h1 {
+                font-size: 1rem;
+                text-align: center;
+            }
+
+            .category-btn {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .main-content {
+                margin-left: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Learn Hub</h1>
+        <ul class="category-list">
+            <li class="category-item">
+                <button class="category-btn" data-target="math">Math Lessons</button>
+            </li>
+            <li class="category-item">
+                <button class="category-btn" data-target="science">Science Lessons</button>
+            </li>
+            <!-- Add more categories here -->
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="pdf-container" id="math">
+            <div class="pdf-item">
+                <h3>Algebra Basics</h3>
+                <iframe src="path/to/your/algebra.pdf" loading="lazy"></iframe>
+            </div>
+            <div class="pdf-item">
+                <h3>Geometry Guide</h3>
+                <iframe src="path/to/your/geometry.pdf" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="pdf-container" id="science">
+            <div class="pdf-item">
+                <h3>Physics Intro</h3>
+                <iframe src="path/to/your/physics.pdf" loading="lazy"></iframe>
+            </div>
+            <div class="pdf-item">
+                <h3>Chemistry Basics</h3>
+                <iframe src="path/to/your/chemistry.pdf" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.category-btn');
+        const containers = document.querySelectorAll('.pdf-container');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and containers
+                buttons.forEach(btn => btn.classList.remove('active'));
+                containers.forEach(container => container.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding container
+                button.classList.add('active');
+                const targetId = button.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Set first category as active by default
+        buttons[0].classList.add('active');
+        containers[0].classList.add('active');
+    </script>
+</body>
+</html>
