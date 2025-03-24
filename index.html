@@ -107,7 +107,7 @@
             <!-- Content Area (Main Body) -->
             <div class="content" id="content-area">
                 <!-- CoinMarketCap Widget -->
-                 <div id="coinmarketcap-widget-coin-price-block" coins="1,23769,9258,27486,4846,24091,11840,11841,4758,13198" currency="USD" theme="light" transparent="false" show-symbol-logo="true" style="display: block;"></div>
+                 <gecko-coin-list-widget locale="en" outlined="true" coin-ids="bitcoin,rejuve-ai,sophiaverse,chia,stellar,kava,decentraland,zksync,arbitrum,optimism,dforce-token,band-protocol,notcoin,polkadot,cosmos,solana,singularity-finance,flare-networks,redbelly-network-token" initial-currency="usd"></gecko-coin-list-widget>
              <!-- Hidden PDF Iframe (for other menu items) -->
                 <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe> 
             </div>
@@ -115,7 +115,7 @@
     </div>
 
     <!-- CoinMarketCap Widget Script -->
-    <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script>
+    <script src="https://widgets.coingecko.com/gecko-coin-list-widget.js"></script>
 
     <!-- JavaScript for Dynamic Content Switching, Active State, and Submenus -->
     <script>
