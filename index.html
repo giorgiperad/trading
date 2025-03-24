@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css" rel="stylesheet">
-    <title>Sidebar with Dynamic PDF Embed and Submenus</title>
+    <title>Sidebar with Centered PDF Embed and Submenus</title>
     <style>
         html, body {
             height: 100%;
@@ -27,12 +27,17 @@
         .content {
             flex-grow: 1;
             padding: 10px;
+            display: flex; /* Use flexbox to center the iframe */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically, optional */
             overflow: auto;
         }
         iframe {
             width: 100%;
+            max-width: 800px; /* Set a max-width to control PDF size */
             height: 100%;
             border: none;
+            margin: 0 auto; /* Fallback centering */
         }
         .sidebar a.active {
             background-color: #4a5568; /* bg-gray-700 */
