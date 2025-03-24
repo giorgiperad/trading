@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css" rel="stylesheet">
-    <title>Sidebar with Full-Width Responsive PDF Embed</title>
+    <title>Sidebar with Bitcoin Price Widget</title>
     <style>
         html, body {
             height: 100%;
@@ -25,14 +25,36 @@
             width: 200px;
         }
         .content {
-            flex-grow: 1; /* Take up all remaining space */
+            flex-grow: 1;
             padding: 10px;
             overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        iframe {
-            width: 100%; /* Full width of the content area */
-            height: 100%; /* Full height of the content area */
+        .pdf-iframe {
+            width: 100%;
+            height: 100%;
             border: none;
+        }
+        .bitcoin-widget {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+        .bitcoin-widget h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .bitcoin-widget p {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f7931a; /* Bitcoin orange */
+            margin: 0;
         }
         .sidebar a.active {
             background-color: #4a5568; /* bg-gray-700 */
@@ -55,24 +77,39 @@
                 <svg class="w-8 h-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" />
                 </svg>
-                <span class="ml-2 text-sm font-bold">CCX</span>
+                <span class="ml-2 text-sm font-bold">The App</span>
             </a>
             <div class="w-full px-2">
                 <div class="flex flex-col items-start w-full mt-3 border-t border-gray-700">
-                    
+                    <div class="w-full">
+                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-content="bitcoin-widget">
+                            <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium">Dashboard</span>
+                        </a>
+                        <div class="submenu">
+                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
+                                <span class="ml-2 text-sm font-medium">Overview</span>
+                            </a>
+                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
+                                <span class="ml-2 text-sm font-medium">Stats</span>
+                            </a>
+                        </div>
+                    </div>
                     <div class="w-full">
                         <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
                             <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            <span class="ml-2 text-sm font-medium">თრეიდინგი</span>
+                            <span class="ml-2 text-sm font-medium">Insights</span>
                         </a>
                         <div class="submenu">
-                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://ta3bviqjtxy1kv7x.public.blob.vercel-storage.com/%E1%83%94%E1%83%9A%E1%83%98%E1%83%9D%E1%83%A2%E1%83%A3%E1%83%A0%E1%83%98_%E1%83%A2%E1%83%90%E1%83%9A%E1%83%A6%E1%83%98%E1%83%A1_%E1%83%97%E1%83%94%E1%83%9D%E1%83%A0%E1%83%98%E1%83%90_-0ZlWm8ZNl6BKX4qnHWUy9sQqgfyJ5H.pdf">
-                                <span class="ml-2 text-sm font-medium">ელიოტური ტალღის თეორია</span>
+                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.orimi.com/pdf-test.pdf">
+                                <span class="ml-2 text-sm font-medium">Sub Insight 1</span>
                             </a>
-                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://ta3bviqjtxy1kv7x.public.blob.vercel-storage.com/%E1%83%AC%E1%83%98%E1%83%9C%E1%83%90%E1%83%A6%E1%83%9D%E1%83%91%E1%83%90_%E1%83%93%E1%83%90_%E1%83%9B%E1%83%AE%E1%83%90%E1%83%A0%E1%83%93%E1%83%90%E1%83%AD%E1%83%94%E1%83%A0%E1%83%90_-xjNZxqUDkCRnBJeTMaN0oua910AI2A.pdf">
-                                <span class="ml-2 text-sm font-medium">წინაღობა და მხარდაჭერა<</span>
+                            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#" data-pdf="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf">
+                                <span class="ml-2 text-sm font-medium">Sub Insight 2</span>
                             </a>
                         </div>
                     </div>
@@ -80,27 +117,47 @@
             </div>
         </div>
 
-        <!-- PDF Content Area (Main Body) -->
-        <div class="content">
-            <iframe id="pdfViewer" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF"></iframe>
+        <!-- Content Area (Main Body) -->
+        <div class="content" id="content-area">
+            <!-- Initial Bitcoin Widget -->
+            <div class="bitcoin-widget" id="bitcoin-widget">
+                <h2>Bitcoin Price</h2>
+                <p>$60,000</p> <!-- Placeholder price -->
+            </div>
+            <!-- Hidden PDF Iframe (for other menu items) -->
+            <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
         </div>
     </div>
 
-    <!-- JavaScript for Dynamic PDF Loading, Active State, and Submenus -->
+    <!-- JavaScript for Dynamic Content Switching, Active State, and Submenus -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const links = document.querySelectorAll('.sidebar a[data-pdf]');
+            const links = document.querySelectorAll('.sidebar a[data-pdf], .sidebar a[data-content]');
             const submenuToggles = document.querySelectorAll('.submenu-toggle');
+            const contentArea = document.getElementById('content-area');
             const pdfViewer = document.getElementById('pdfViewer');
+            const bitcoinWidget = document.getElementById('bitcoin-widget');
 
-            // Handle PDF loading and active state
+            // Handle content switching and active state
             links.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     links.forEach(l => l.classList.remove('active')); // Remove active from all
                     link.classList.add('active'); // Add active to clicked link
+
                     const pdfUrl = link.getAttribute('data-pdf');
-                    pdfViewer.src = `${pdfUrl}#toolbar=0&navpanes=0`; // Update iframe
+                    const contentType = link.getAttribute('data-content');
+
+                    if (contentType === 'bitcoin-widget') {
+                        // Show Bitcoin widget
+                        bitcoinWidget.style.display = 'block';
+                        pdfViewer.style.display = 'none';
+                    } else if (pdfUrl) {
+                        // Show PDF
+                        pdfViewer.src = `${pdfUrl}#toolbar=0&navpanes=0`;
+                        pdfViewer.style.display = 'block';
+                        bitcoinWidget.style.display = 'none';
+                    }
                 });
             });
 
@@ -109,16 +166,18 @@
                 toggle.addEventListener('click', (e) => {
                     const submenu = toggle.nextElementSibling;
                     if (submenu.classList.contains('submenu')) {
-                        e.stopPropagation(); // Prevent triggering the PDF load on toggle click
+                        e.stopPropagation(); // Prevent triggering the content switch on toggle click
                         submenu.classList.toggle('active');
                     }
                 });
             });
 
-            // Set initial active state to Dashboard
-            const dashboardLink = document.querySelector('.sidebar a[data-pdf]:first-child');
+            // Set initial active state to Dashboard with Bitcoin widget
+            const dashboardLink = document.querySelector('.sidebar a[data-content="bitcoin-widget"]');
             if (dashboardLink) {
                 dashboardLink.classList.add('active');
+                bitcoinWidget.style.display = 'block';
+                pdfViewer.style.display = 'none';
             }
         });
     </script>
