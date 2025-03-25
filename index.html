@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.1/tailwind.min.css" rel="stylesheet">
-    <title>Sidebar with CoinGecko Widget</title>
+    <title>Sidebar with Custom Crypto Table</title>
     <style>
         html, body {
             height: 100%;
@@ -50,12 +50,29 @@
             border: none;
             display: block;
         }
-        .gecko-coin-list-widget {
+        .crypto-table-container {
             width: 100%;
-            height: auto; /* Let widget size naturally */
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            height: 100%;
+            overflow-y: auto;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .crypto-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .crypto-table th, .crypto-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #4a5568;
+        }
+        .crypto-table th {
+            background-color: #2d3748;
+            position: sticky;
+            top: 0;
+        }
+        .crypto-table tr:hover {
+            background-color: #2d3748;
         }
         .sidebar a.active {
             background-color: #4a5568;
@@ -83,7 +100,7 @@
             <div class="w-full px-2">
                 <div class="flex flex-col items-start w-full mt-3 border-t border-gray-700">
                     <div class="w-full">
-                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-content="crypto-widget">
+                        <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 submenu-toggle" href="#" data-content="crypto-table">
                             <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -106,24 +123,75 @@
         <div class="main-wrapper">
             <!-- Content Area (Main Body) -->
             <div class="content" id="content-area">
-                <!-- CoinGecko Coin List Widget -->
-<gecko-coin-list-widget locale="en" dark-mode="true" outlined="true" coin-ids="bitcoin,rejuve-ai,sophiaverse,chia,stellar,kava,decentraland,zksync,arbitrum,optimism,dforce-token,band-protocol,notcoin,polkadot,solana,singularity-finance,flare-networks,redbelly-network-token,songbird,vestate,coin98,hypercycle,alien-worlds,chainge-finance,befi-labs,hello-labs,masa-finance,cardano,ripple,celo,osmosis,cosmos,berachain-bera,sui" initial-currency="usd"></gecko-coin-list-widget>                <!-- Hidden PDF Iframe (for other menu items) -->
+                <!-- Custom Crypto Table -->
+                <div class="crypto-table-container" id="crypto-table-container">
+                    <table class="crypto-table" id="crypto-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Coin</th>
+                                <th>Price (USD)</th>
+                                <th>24h Change</th>
+                                <th>Market Cap</th>
+                            </tr>
+                        </thead>
+                        <tbody id="crypto-table-body"></tbody>
+                    </table>
+                </div>
+                <!-- Hidden PDF Iframe -->
                 <iframe id="pdfViewer" class="pdf-iframe" src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf#toolbar=0&navpanes=0" title="Embedded PDF" style="display: none;"></iframe>
             </div>
         </div>
     </div>
 
-    <!-- CoinGecko Widget Script -->
-    <script src="https://widgets.coingecko.com/gecko-coin-list-widget.js"></script>
-
-    <!-- JavaScript for Dynamic Content Switching, Active State, and Submenus -->
+    <!-- JavaScript for Dynamic Content Switching, Active State, Submenus, and Crypto Table -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const links = document.querySelectorAll('.sidebar a[data-pdf], .sidebar a[data-content]');
             const submenuToggles = document.querySelectorAll('.submenu-toggle');
             const contentArea = document.getElementById('content-area');
             const pdfViewer = document.getElementById('pdfViewer');
-            const cryptoWidget = document.querySelector('.gecko-coin-list-widget');
+            const cryptoTableContainer = document.getElementById('crypto-table-container');
+            const cryptoTableBody = document.getElementById('crypto-table-body');
+
+            // Coin IDs
+            const coinIds = 'bitcoin,rejuve-ai,sophiaverse,chia,stellar,kava,decentraland,zksync,arbitrum,optimism,dforce-token,band-protocol,notcoin,polkadot,solana,singularity-finance,flare-networks,redbelly-network-token,songbird,vestate,coin98,hypercycle,alien-worlds,chainge-finance,befi-labs,hello-labs,masa-finance,cardano,ripple,celo,osmosis,cosmos,berachain-bera,sui,beoble,dia-data,chainlink,agridex-governance-token,kolz,kitten-haimer,badger-dao,iota,worldcoin-wld,mintlayer,ethereum';
+
+            // Fetch crypto data from CoinGecko API
+            async function fetchCryptoData() {
+                try {
+                    const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIds}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
+                    const data = await response.json();
+                    populateCryptoTable(data);
+                } catch (error) {
+                    console.error('Error fetching crypto data:', error);
+                    cryptoTableBody.innerHTML = '<tr><td colspan="5">Error loading data</td></tr>';
+                }
+            }
+
+            // Populate the crypto table
+            function populateCryptoTable(coins) {
+                cryptoTableBody.innerHTML = '';
+                coins.forEach((coin, index) => {
+                    const row = document.createElement('tr');
+                    const priceChange = coin.price_change_percentage_24h || 0;
+                    const changeColor = priceChange >= 0 ? 'text-green-500' : 'text-red-500';
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>
+                            <img src="${coin.image}" alt="${coin.name}" width="24" height="24" class="inline-block mr-2">
+                            ${coin.name} (${coin.symbol.toUpperCase()})
+                        </td>
+                        <td>$${coin.current_price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 })}</td>
+                        <td class="${changeColor}">${priceChange.toFixed(2)}%</td>
+                        <td>$${coin.market_cap.toLocaleString()}</td>
+                    `;
+                    cryptoTableBody.appendChild(row);
+                });
+            }
+
+            // Fetch data on page load
+            fetchCryptoData();
 
             // Handle content switching and active state
             links.forEach(link => {
@@ -135,15 +203,15 @@
                     const pdfUrl = link.getAttribute('data-pdf');
                     const contentType = link.getAttribute('data-content');
 
-                    if (contentType === 'crypto-widget') {
-                        // Show Crypto widget
-                        cryptoWidget.style.display = 'block';
+                    if (contentType === 'crypto-table') {
+                        // Show Crypto table
+                        cryptoTableContainer.style.display = 'block';
                         pdfViewer.style.display = 'none';
                     } else if (pdfUrl) {
                         // Show PDF
                         pdfViewer.src = `${pdfUrl}#toolbar=0&navpanes=0`;
                         pdfViewer.style.display = 'block';
-                        cryptoWidget.style.display = 'none';
+                        cryptoTableContainer.style.display = 'none';
                     }
                 });
             });
@@ -159,11 +227,11 @@
                 });
             });
 
-            // Set initial active state to Dashboard with Crypto widget
-            const dashboardLink = document.querySelector('.sidebar a[data-content="crypto-widget"]');
-            if (dashboardLink) {
-                dashboardLink.classList.add('active');
-                cryptoWidget.style.display = 'block';
+            // Set initial active state to Trading with Crypto table
+            const tradingLink = document.querySelector('.sidebar a[data-content="crypto-table"]');
+            if (tradingLink) {
+                tradingLink.classList.add('active');
+                cryptoTableContainer.style.display = 'block';
                 pdfViewer.style.display = 'none';
             }
         });
